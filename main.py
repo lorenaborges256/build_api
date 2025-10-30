@@ -1,5 +1,12 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
+
+# creating our database object! This allows us to use our ORM
+db = SQLAlchemy()
+
+# creating our marshmallow object! This allows us to use schemas
+ma = Marshmallow()
 
 def create_app():
     
@@ -8,8 +15,14 @@ def create_app():
 
     # configuring our app:
     app.config.from_object("config.app_config")
-
-    # creating our database object! This allows us to use our ORM
-    db = SQLAlchemy(app)
     
+    # initialising our database object with the flask app
+    db.init_app(app)
+
+    # creating our marshmallow object! This allows us to use schemas
+    ma.init_app(app)
+
+    from commands import db_commands
+    app.register_blueprint(db_commands)
+
     return app
