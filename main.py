@@ -1,11 +1,15 @@
 from flask import Flask
-from init import db
-import os
+from flask_sqlalchemy import SQLAlchemy
 
+def create_app():
+    
+    # Creating the flask app object - this is the core of our app!
+    app = Flask(__name__)
 
+    # configuring our app:
+    app.config.from_object("config.app_config")
 
-app = Flask(__name__)
-
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+    # creating our database object! This allows us to use our ORM
+    db = SQLAlchemy(app)
+    
+    return app
