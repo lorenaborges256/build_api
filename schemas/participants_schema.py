@@ -1,12 +1,12 @@
 from main import ma
+from marshmallow import fields
 
-# create the Participant Schema with Marshmallow, it will provide the serialization needed for converting the data into JSON
 class ParticipantSchema(ma.Schema):
-    class Meta:
-        # Fields to expose
-        fields = ("id", "name", "address", "phone")
+    id = fields.Int()
+    name = fields.Str()
+    email = fields.Email()
+    phone = fields.Str()
+    # Add other fields as needed
 
-# single participant schema, when one participant needs to be retrieved
 participant_schema = ParticipantSchema()
-# multiple participant schema, when many participants need to be retrieved
 participants_schema = ParticipantSchema(many=True)
