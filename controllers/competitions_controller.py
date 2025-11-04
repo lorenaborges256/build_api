@@ -16,6 +16,19 @@ def get_competitions():
     # return the data in JSON format
     return jsonify(result)
 
+# The GET competition routes endpoint
+@competitions.route("/<int:id>/", methods=["GET"])
+def get_competition(id):
+    stmt = db.select(Competition).filter_by(id=id)
+    competition = db.session.scalar(stmt)
+    #return an error if the competition doesn't exist
+    if not competition:
+        return abort(400, description= "Competition does not exist")
+    # Convert the competitions from the database into a JSON format and store them in result
+    result = competition_schema.dump(competition)
+    # return the data in JSON format
+    return jsonify(result)
+
 # The POST route endpoint
 @competitions.route("/", methods=["POST"])
 def create_competition():

@@ -4,6 +4,11 @@
 In this lesson, we will start building an API with similar functionality but with a modular structure.
 What we are trying to build is an API for keeping track of participants and competitions.
 
+0. Virtual environment - connected and actived
+```bash
+python3 -m venv venv && source venv/bin/activate
+```
+
 1. Configurations Files 
 to access postgres sudo -u postgres psql
 \l list databases created
