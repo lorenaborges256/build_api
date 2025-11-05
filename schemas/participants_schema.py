@@ -4,7 +4,7 @@ from marshmallow import fields
 class ParticipantSchema(ma.Schema):
     id = fields.Int()
     name = fields.Str()
-    email = fields.Email()
+    address = fields.Str()
     phone = fields.Str()
     # Add other fields as needed
 
