@@ -61,3 +61,45 @@ def delete_competition(id):
     db.session.commit()
     # return the competition in the response
     return jsonify(competition_schema.dump(competition))
+
+# The POST route endpoint
+@competitions.route("/<int:id>/", methods=["PUT"])
+def update_competition(id):
+    # Create a new competition
+    competition_fields = competition_schema.load(request.json)
+
+    # find the competition
+    stmt = db.select(Competition).filter_by(id=id)
+    competition = db.session.scalar(stmt)
+
+    # return an error if the competition doesn't exist
+    if not competition:
+        return abort(400, description= "Competition does not exist")
+    # update the competition details with the given values
+    competition.title = competition_fields["title"]
+    competition.description = competition_fields["description"]
+    competition.prize = competition_fields["prize"]
+    competition.year = competition_fields["year"]
+    # add to the database and commit
+    db.session.commit()
+    #return the competition in the response
+    return jsonify(competition_schema.dump(competition))
+
+@competitions.route("/search", methods=["GET"])
+def search_competitions():
+     # create an empty list in case the query string is not valid
+    competitions_list = []
+    # search by year
+    if request.args.get('year'):
+        # find the competition by filtering by the year
+        stmt = db.select(Competition).filter_by(year= request.args.get('year'))
+        competitions_list = db.session.scalars(stmt)
+    # search by prize instead of year
+    elif request.args.get('prize'):
+        # find the competition by filtering by the prize
+        stmt = db.select(Competition).filter_by(prize= request.args.get('prize'))
+        competitions_list = db.session.scalars(stmt)
+
+    result = competitions_schema.dump(competitions_list)
+    # return the data in JSON format
+    return jsonify(result)
