@@ -20,6 +20,8 @@ CREATE DATABASE jan_lms_db;
 ```
 - see all database in the system -> \l
 - see all users int he system -> \du
+- connect to a database -> \c [database_name]
+- see all tables -> \dt
 
 - create user
 ```
