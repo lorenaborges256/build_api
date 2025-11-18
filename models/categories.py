@@ -8,3 +8,8 @@ class Category(db.Model):
     # Add the rest of the attributes. 
     title = db.Column(db.String())
     description = db.Column(db.String())
+    competitions = db.relationship(
+        "Competition",
+        back_populates="category",
+        cascade="all, delete"
+    )

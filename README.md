@@ -39,3 +39,6 @@ GRANT ALL PRIVILEGES ON SCHEMA public TO jan_lms_dev;
 
 2. Models
 we will have two models for now: Competition (such as FIFA world cup, Olympic, Australian Football League, etc.) and Participant (any person who participates in the competition).
+
+33. ERD - Flask Associations
+![ERD](images/erd_participants_competitions.png)

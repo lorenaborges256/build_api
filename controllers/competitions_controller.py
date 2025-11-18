@@ -40,6 +40,8 @@ def create_competition():
     new_competition.description = competition_fields["description"]
     new_competition.prize = competition_fields["prize"]
     new_competition.year = competition_fields["year"]
+    # add category's id
+    new_competition.category_id = competition_fields["category_id"]
     # add to the database and commit
     db.session.add(new_competition)
     db.session.commit()

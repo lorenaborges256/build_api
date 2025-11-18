@@ -7,6 +7,7 @@ class CompetitionSchema(ma.Schema):
     description = fields.Str()
     prize = fields.Str()
     year = fields.Int()
+    category_id = fields.Int()
 
 competition_schema = CompetitionSchema()
 competitions_schema = CompetitionSchema(many=True)
