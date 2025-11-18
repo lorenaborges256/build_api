@@ -1,7 +1,9 @@
 from flask import Blueprint, jsonify, request, abort
 from main import db
 from models.competitions import Competition
+from models.categories import Category
 from schemas.competitions_schema import competition_schema, competitions_schema
+from schemas.categories_schema import category_schema, categories_schema
 
 competitions = Blueprint('competitions', __name__, url_prefix="/competitions")
 
@@ -26,6 +28,16 @@ def get_competition(id):
         return abort(400, description= "Competition does not exist")
     # Convert the competitions from the database into a JSON format and store them in result
     result = competition_schema.dump(competition)
+    # return the data in JSON format
+    return jsonify(result)
+
+@competitions.route("/categories", methods=["GET"])
+def get_categories():
+    # get all the categories from the database table
+    stmt = db.select(Category)
+    categories_list = db.session.scalars(stmt)
+    # Convert the categories from the database into a JSON format and store them in result
+    result = categories_schema.dump(categories_list)
     # return the data in JSON format
     return jsonify(result)
 

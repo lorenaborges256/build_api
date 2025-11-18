@@ -11,7 +11,7 @@ class CompetitionSchema(ma.Schema):
     prize = fields.Str()
     year = fields.Int()
     category_id = fields.Int(load_only = True)    
-    category =  fields.Nested(CategorySchema)
+    category =  fields.Nested(CategorySchema, only=["title"])
     class Meta:
         fields = ("id", "title", "description", "prize", "year", "category_id", "category")
 
