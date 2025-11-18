@@ -1,10 +1,12 @@
 from main import ma
+from marshmallow import fields
 
 # create the Category Schema with Marshmallow, it will provide the serialization needed for converting the data into JSON
 class CategorySchema(ma.Schema):
-    class Meta:
-        # Fields to expose
-        fields = ("id", "title", "description")
+    # Fields to expose
+    id = fields.Int()
+    title = fields.Str()
+    description = fields.Str()
 
 # single category schema, when one category needs to be retrieved
 category_schema = CategorySchema()
