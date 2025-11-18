@@ -15,3 +15,7 @@ class Competition(db.Model):
         "Category",
         back_populates="competitions"
     )
+    participations = db.relationship(
+        "Participation",
+        back_populates="competition"
+    )

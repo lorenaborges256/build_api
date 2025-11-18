@@ -3,6 +3,7 @@ from flask import Blueprint
 from models.competitions import Competition
 from models.participants import Participant
 from models.categories import Category
+from models.participations import Participation
 
 db_commands = Blueprint("db", __name__)
 
@@ -66,6 +67,24 @@ def seed_db():
         phone="0487654321"
     )
     db.session.add(participant2)
+    # commit the changes
+    db.session.commit()
+
+    participation1 = Participation(
+        rank=1,
+        competition=competition1,
+        participant=participant1
+    )
+    db.session.add(participation1)
+
+    participation2 = Participation(
+        rank=7,
+        competition=competition1,
+        participant=participant2
+    )
+    db.session.add(participation2)
+
+
         
     # commit the changes
     db.session.commit()
