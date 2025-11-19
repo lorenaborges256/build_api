@@ -1,6 +1,9 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from dotenv import load_dotenv
+load_dotenv()
+
 
 # creating our database object! This allows us to use our ORM
 db = SQLAlchemy()
@@ -9,7 +12,6 @@ db = SQLAlchemy()
 ma = Marshmallow()
 
 def create_app():
-    
     # Creating the flask app object - this is the core of our app!
     app = Flask(__name__)
 
@@ -26,10 +28,14 @@ def create_app():
     from commands import db_commands
     app.register_blueprint(db_commands)
 
-        # import the controllers and activate the blueprints
+    # import the controllers and activate the blueprints
     from controllers import registerable_controllers
 
     for controller in registerable_controllers:
         app.register_blueprint(controller)
+
+    @app.route("/ping")
+    def ping():
+        return "pong"
 
     return app
