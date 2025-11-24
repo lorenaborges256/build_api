@@ -4,6 +4,8 @@
 In this lesson, we will start building an API with similar functionality but with a modular structure.
 What we are trying to build is an API for keeping track of participants and competitions.
 
+# Configuration Files
+
 0. Virtual environment - connected and actived
 ```bash
 python3 -m venv venv && source venv/bin/activate
@@ -36,6 +38,25 @@ GRANT ALL PRIVILEGES ON DATABASE jan_lms_dev TO jan_lms_dev;
 GRANT ALL PRIVILEGES ON SCHEMA public TO jan_lms_dev;
 ```
 - connect to database \c databasename
+
+## Environment variables
+- .env and .env.example
+``` bash
+DATABASE_URL="postgresql+psycopg2://db_dev:123456@localhost:5432/competitions_db"
+```
+- .flaskenv .flaskenv.example 
+```bash 
+FLASK_APP=main
+FLASK_ENV=development
+FLASK_DEBUG=True
+```
+- .gitignore
+``` bash
+.venv/
+.env/
+.flaskenv/
+__pycache__/
+```
 
 2. Models
 we will have two models for now: Competition (such as FIFA world cup, Olympic, Australian Football League, etc.) and Participant (any person who participates in the competition).
